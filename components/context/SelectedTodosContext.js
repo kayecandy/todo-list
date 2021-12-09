@@ -22,9 +22,11 @@ export const useSelectedTodos = () => {
 };
 
 export const withSelectedTodosContext = (Component) => {
-  return (props) => (
-    <SelectedTodosContextProvider>
-      <Component {...props}></Component>
-    </SelectedTodosContextProvider>
-  );
+  return function ComponentWithSelectedTodosContext(props) {
+    return (
+      <SelectedTodosContextProvider>
+        <Component {...props}></Component>
+      </SelectedTodosContextProvider>
+    );
+  };
 };
