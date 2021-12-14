@@ -4,8 +4,6 @@ import { login_cookie } from "./_login_cookie";
 export default async function handler(req, res) {
   const { todo, project } = req.body;
 
-  console.log(req.body);
-
   const cookie = await login_cookie();
 
   const addReq = await (

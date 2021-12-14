@@ -56,8 +56,6 @@ export async function getServerSideProps(context) {
     })
   ).json();
 
-  console.log(todos);
-
   return {
     props: {
       todos: todos.checkins,
