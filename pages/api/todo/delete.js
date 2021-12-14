@@ -1,4 +1,5 @@
 import FormData from "form-data";
+import { login_cookie } from "./_login_cookie";
 
 export default async function handler(req, res) {
   /**
@@ -6,19 +7,7 @@ export default async function handler(req, res) {
    */
   const todoIds = req.body.id;
 
-  const loginRequest = await fetch(process.env.API_URL + "/login", {
-    method: "POST",
-    body: (() => {
-      const loginFormData = new FormData();
-
-      loginFormData.append("username", process.env.API_USERNAME);
-      loginFormData.append("password", process.env.API_PASSWORD);
-
-      return loginFormData;
-    })(),
-  });
-
-  const cookie = loginRequest.headers.get("set-cookie");
+  const cookie = await login_cookie();
 
   let _res = [];
 
@@ -27,7 +16,7 @@ export default async function handler(req, res) {
       await fetch(process.env.API_URL + "/checkin/delete", {
         method: "POST",
         headers: {
-          cookie: cookie,
+          cookie,
         },
         body: (() => {
           const deleteFormData = new FormData();

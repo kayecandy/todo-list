@@ -38,11 +38,6 @@ export default function TodoTable({ todos = [] }) {
           sort: true,
         },
         {
-          dataField: "hours",
-          text: "Duration",
-          sort: true,
-        },
-        {
           dataField: "tag.name",
           text: "Project",
           sort: true,
@@ -54,49 +49,12 @@ export default function TodoTable({ todos = [] }) {
         },
         {
           dataField: "date",
-          text: "Date",
+          text: "Date Added",
           sort: true,
+          sortValue: (a, b) => new Date(a),
         },
       ]}
       data={todos}
     ></BootstrapTable>
-  );
-  return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th data-field="state" data-checkbox="true" data-sortable="true"></th>
-          <th data-field="id" data-sortable="true">
-            ID
-          </th>
-          <th data-field="hours" data-sortable="true">
-            Duration
-          </th>
-          <th data-field="tag.name" data-sortable="true">
-            Project
-          </th>
-          <th data-field="activity" data-sortable="true">
-            Todo
-          </th>
-          <th data-field="date" data-sortable="true">
-            Date
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {todos.map((todo) => (
-          <tr key={todo.id}>
-            <td>
-              <Form.Check type="checkbox"></Form.Check>
-            </td>
-            <td>{todo.id}</td>
-            <td>{todo.hours}</td>
-            <td>{todo.tag.name}</td>
-            <td>{todo.activity}</td>
-            <td>{todo.date}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
   );
 }
